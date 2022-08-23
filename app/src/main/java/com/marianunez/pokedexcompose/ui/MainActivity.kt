@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(navController = navController, startDestination = "pokemonList") {
                     composable("pokemonList") {
-                        // TODO: poner la screen
+                        PokemonListView(navController = navController)
                     }
                     composable(route = "pokemonDetail/{pokemonName}", arguments = listOf(
                         navArgument("pokemonName") {
@@ -35,13 +35,6 @@ class MainActivity : ComponentActivity() {
                             it.arguments?.getString("pokemonName")
                         }
                     }
-                }
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-
                 }
             }
         }
