@@ -4,20 +4,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.marianunez.pokedexcompose.data.network.response.PokemonList
+import com.marianunez.pokedexcompose.data.network.response.PokemonResult
 import com.marianunez.pokedexcompose.domain.PokemonListUseCase
 import kotlinx.coroutines.launch
 
-class PokemonListViewModel(private val pokemonListUseCase: PokemonListUseCase): ViewModel() {
+class PokemonListViewModel(private val pokemonListUseCase: PokemonListUseCase) : ViewModel() {
 
-    private val _pokemonListResult = MutableLiveData<Result<PokemonList>>()
-    val pokemonListResult: LiveData<Result<PokemonList>> = _pokemonListResult
+    private val _pokemonListResult = MutableLiveData<List<PokemonResult>>()
+    val pokemonListResult: LiveData<List<PokemonResult>> = _pokemonListResult
 
-    fun getPokemonList(){
+    fun getPokemonList() {
         viewModelScope.launch {
             pokemonListUseCase.getPokemonList()
-                .onSuccess { _pokemonListResult.postValue(Result.success(it)) }
-                .onFailure { _pokemonListResult.postValue(Result.failure(Throwable())) }
+                .onSuccess { pokemonList -> _pokemonListResult.postValue(pokemonList) }
+                .onFailure { Throwable() }
         }
     }
 
