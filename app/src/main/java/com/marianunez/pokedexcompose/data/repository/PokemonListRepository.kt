@@ -1,8 +1,8 @@
 package com.marianunez.pokedexcompose.data.repository
 
-import com.marianunez.pokedexcompose.data.network.response.PokemonList
+import com.marianunez.pokedexcompose.data.network.response.PokemonResult
 
 interface PokemonListRepository {
 
-    suspend fun getPokemonList(): Result<PokemonList>
+    suspend fun getPokemonList(): Result<List<PokemonResult>>
 }
